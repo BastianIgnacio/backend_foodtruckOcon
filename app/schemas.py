@@ -27,18 +27,6 @@ class CategoryResponse(BaseModel):
         from_attributes = True
 
 
-# ── Auth ──────────────────────────────────────────────────────────────────────
-
-class Token(BaseModel):
-    access_token: str
-    token_type: str
-    user: "UserResponse"
-
-
-class TokenData(BaseModel):
-    username: Optional[str] = None
-
-
 # ── User ──────────────────────────────────────────────────────────────────────
 
 class UserCreate(BaseModel):
@@ -68,6 +56,18 @@ class UserResponse(BaseModel):
 
     class Config:
         from_attributes = True
+
+
+# ── Auth ──────────────────────────────────────────────────────────────────────
+
+class Token(BaseModel):
+    access_token: str
+    token_type: str
+    user: UserResponse
+
+
+class TokenData(BaseModel):
+    username: Optional[str] = None
 
 
 # ── Product ───────────────────────────────────────────────────────────────────
