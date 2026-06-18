@@ -7,6 +7,7 @@ class Settings(BaseSettings):
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 480
     DATABASE_URL: str = "postgresql://user:password@localhost:5432/foodtruck"
     SUMATRA_PDF_PATH: str = ""
+    CORS_ORIGINS: str = "http://localhost:5173,http://localhost:3000,http://127.0.0.1:5173"
 
     class Config:
         env_file = ".env"
