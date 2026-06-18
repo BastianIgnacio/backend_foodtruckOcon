@@ -22,19 +22,16 @@ async def lifespan(app: FastAPI):
     # Migrations for columns added after initial DB creation
     with engine.connect() as conn:
         for stmt in [
-            "ALTER TABLE categories ADD COLUMN is_active INTEGER NOT NULL DEFAULT 1",
-            "ALTER TABLE products ADD COLUMN show_in_carousel BOOLEAN DEFAULT 0 NOT NULL",
-            "ALTER TABLE products ADD COLUMN show_in_carousel2 BOOLEAN DEFAULT 0 NOT NULL",
-            "ALTER TABLE products ADD COLUMN show_in_carousel3 BOOLEAN DEFAULT 0 NOT NULL",
-            "ALTER TABLE raw_materials ADD COLUMN barcode VARCHAR(100)",
-            "ALTER TABLE pending_orders ADD COLUMN attended_at DATETIME",
-            "ALTER TABLE pending_orders ADD COLUMN cancelled_at DATETIME",
+            "ALTER TABLE categories ADD COLUMN IF NOT EXISTS is_active BOOLEAN NOT NULL DEFAULT TRUE",
+            "ALTER TABLE products ADD COLUMN IF NOT EXISTS show_in_carousel BOOLEAN NOT NULL DEFAULT FALSE",
+            "ALTER TABLE products ADD COLUMN IF NOT EXISTS show_in_carousel2 BOOLEAN NOT NULL DEFAULT FALSE",
+            "ALTER TABLE products ADD COLUMN IF NOT EXISTS show_in_carousel3 BOOLEAN NOT NULL DEFAULT FALSE",
+            "ALTER TABLE raw_materials ADD COLUMN IF NOT EXISTS barcode VARCHAR(100)",
+            "ALTER TABLE pending_orders ADD COLUMN IF NOT EXISTS attended_at TIMESTAMP WITH TIME ZONE",
+            "ALTER TABLE pending_orders ADD COLUMN IF NOT EXISTS cancelled_at TIMESTAMP WITH TIME ZONE",
         ]:
-            try:
-                conn.execute(text(stmt))
-                conn.commit()
-            except Exception:
-                pass
+            conn.execute(text(stmt))
+            conn.commit()
     # Seed initial categories
     INITIAL_CATEGORIES = [
         {"name": "Hot Dogs", "emoji": "🌭"},
