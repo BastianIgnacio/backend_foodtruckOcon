@@ -5,7 +5,7 @@ class Settings(BaseSettings):
     SECRET_KEY: str = "foodtruck-super-secret-key-2024"
     ALGORITHM: str = "HS256"
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 480
-    DATABASE_URL: str = "postgresql://user:password@localhost:5432/foodtruck"
+    DATABASE_URL: str = "postgresql://postgres:fNCryRyWoCFSjoipTuRAxYyZvnJbaMtF@postgres.railway.internal:5432/railway"
     SUMATRA_PDF_PATH: str = ""
 
     class Config:
