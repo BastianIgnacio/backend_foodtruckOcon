@@ -7,7 +7,7 @@ class Settings(BaseSettings):
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 480
     DATABASE_URL: str = "postgresql://postgres:fNCryRyWoCFSjoipTuRAxYyZvnJbaMtF@postgres.railway.internal:5432/railway"
     SUMATRA_PDF_PATH: str = ""
-    CORS_ORIGINS: str = "http://localhost:5173,http://localhost:3000,http://127.0.0.1:5173"
+    CORS_ORIGINS: str = "http://localhost:5173,http://localhost:3000,http://127.0.0.1:5173,https://frontend-foodtruck-ocon.vercel.app"
 
     class Config:
         env_file = ".env"
